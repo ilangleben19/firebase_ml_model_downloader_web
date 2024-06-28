@@ -10,7 +10,7 @@ class FirebaseMlModelDownloaderWeb extends FirebaseModelDownloaderPlatform {
 
     print("in registerWith()");
     FirebaseModelDownloaderPlatform.instance =
-        FirebaseMlModelDownloaderWeb(app: FirebaseModelDownloader.instance.app);
+        FirebaseMlModelDownloaderWeb.instance;
 
     //print("registerWith() is not really implemented...");
   }
