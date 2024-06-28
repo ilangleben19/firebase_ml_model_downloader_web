@@ -35,20 +35,23 @@ class FirebaseMlModelDownloaderWeb extends FirebaseModelDownloaderPlatform {
     FirebaseModelDownloadConditions conditions,
   ) {
     print("Web plugin working from getModel()! -Ian");
-    throw UnimplementedError('getModel() is not implemented');
+    //throw UnimplementedError('getModel() is not implemented');
+    return Future.value(null);
   }
 
   /// Lists all models downloaded to device.
   @override
   Future<List<FirebaseCustomModel>> listDownloadedModels() {
     print("Web plugin working from listDownloadedModels()! -Ian");
-    throw UnimplementedError('listDownloadedModels() is not implemented');
+    //throw UnimplementedError('listDownloadedModels() is not implemented');
+    return Future.value(null);
   }
 
   /// Deletes a locally downloaded model by name.
   @override
   Future<void> deleteDownloadedModel(String modelName) {
     print("Web plugin working from deleteDownloadedModel()! -Ian");
-    throw UnimplementedError('deleteDownloadedModel() is not implemented');
+    //throw UnimplementedError('deleteDownloadedModel() is not implemented');
+    return Future.value(null);
   }
 }
