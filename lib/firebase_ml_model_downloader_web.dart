@@ -1,3 +1,4 @@
+import 'package:firebase_ml_model_downloader/firebase_ml_model_downloader.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ml_model_downloader_platform_interface/firebase_ml_model_downloader_platform_interface.dart';
@@ -8,7 +9,7 @@ class FirebaseMlModelDownloaderWeb extends FirebaseModelDownloaderPlatform {
     FirebaseApp app = Firebase.app();
 
     FirebaseModelDownloaderPlatform.instance =
-        FirebaseMlModelDownloaderWeb(app: app);
+        FirebaseMlModelDownloaderWeb(app: FirebaseModelDownloader.instance.app);
 
     //print("registerWith() is not really implemented...");
   }
