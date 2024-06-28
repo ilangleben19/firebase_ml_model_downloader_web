@@ -6,8 +6,9 @@ import 'package:firebase_ml_model_downloader_platform_interface/firebase_ml_mode
 class FirebaseMlModelDownloaderWeb extends FirebaseModelDownloaderPlatform {
   static void registerWith(Registrar registrar) {
     // Copied from https://github.com/firebase/flutterfire/blob/b1584aa7f3f97bc263b1e8966fd33495613e20b7/packages/firebase_ml_model_downloader/firebase_ml_model_downloader/lib/src/firebase_ml_model_downloader.dart#L32
-    FirebaseApp app = Firebase.app();
+    //FirebaseApp app = Firebase.app();
 
+    print("in registerWith()");
     FirebaseModelDownloaderPlatform.instance =
         FirebaseMlModelDownloaderWeb(app: FirebaseModelDownloader.instance.app);
 
@@ -15,6 +16,7 @@ class FirebaseMlModelDownloaderWeb extends FirebaseModelDownloaderPlatform {
   }
 
   static FirebaseMlModelDownloaderWeb get instance {
+    print("fetching instance");
     return FirebaseMlModelDownloaderWeb._();
   }
 
@@ -25,6 +27,7 @@ class FirebaseMlModelDownloaderWeb extends FirebaseModelDownloaderPlatform {
 
   @override
   FirebaseModelDownloaderPlatform delegateFor({required FirebaseApp app}) {
+    print('in delegateFor() with app=${app.name}');
     return FirebaseMlModelDownloaderWeb(app: app);
   }
 
