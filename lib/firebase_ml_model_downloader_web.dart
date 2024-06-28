@@ -31,11 +31,8 @@ class FirebaseMlModelDownloaderWeb extends FirebaseModelDownloaderPlatform {
     FirebaseModelDownloadType downloadType,
     FirebaseModelDownloadConditions conditions,
   ) {
-    return Future.value(FirebaseCustomModel(
-        file: File.fromUri(Uri(path: './Test file name.text')),
-        size: 613,
-        name: 'Test file name.test',
-        hash: ''));
+    print("Web plugin working from getModel()! -Ian");
+    throw UnimplementedError('getModel() is not implemented');
   }
 
   /// Lists all models downloaded to device.
