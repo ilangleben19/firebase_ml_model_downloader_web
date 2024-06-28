@@ -1,7 +1,16 @@
+import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ml_model_downloader_platform_interface/firebase_ml_model_downloader_platform_interface.dart';
 
 class FirebaseMlModelDownloaderWeb extends FirebaseModelDownloaderPlatform {
+  static void registerWith(Registrar registrar) {
+    // Copied from https://github.com/firebase/flutterfire/blob/b1584aa7f3f97bc263b1e8966fd33495613e20b7/packages/firebase_ml_model_downloader/firebase_ml_model_downloader/lib/src/firebase_ml_model_downloader.dart#L32
+    FirebaseApp app = Firebase.app();
+
+    FirebaseModelDownloaderPlatform.instance =
+        FirebaseMlModelDownloaderWeb(app: app);
+  }
+
   static FirebaseMlModelDownloaderWeb get instance {
     return FirebaseMlModelDownloaderWeb._();
   }
