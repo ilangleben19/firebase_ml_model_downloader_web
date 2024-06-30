@@ -4,6 +4,8 @@ import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ml_model_downloader_platform_interface/firebase_ml_model_downloader_platform_interface.dart';
 
+import 'custom_model.dart';
+
 class FirebaseMlModelDownloaderWeb extends FirebaseModelDownloaderPlatform {
   static void registerWith(Registrar registrar) {
     FirebaseModelDownloaderPlatform.instance =
@@ -32,12 +34,20 @@ class FirebaseMlModelDownloaderWeb extends FirebaseModelDownloaderPlatform {
     FirebaseModelDownloadConditions conditions,
   ) {
     print("Web plugin working from getModel()! -Ian");
-    throw UnimplementedError('getModel() is not implemented');
+    //throw UnimplementedError('getModel() is not implemented');
+
+    return Future.value(FirebaseCustomModel(
+        file: File.fromUri(Uri(path: './test12345')),
+        size: 613,
+        name: 'test-model',
+        hash: '1235'));
   }
 
   /// Lists all models downloaded to device.
   @override
-  Future<List<FirebaseCustomModel>> listDownloadedModels() {
+  Future<List<FirebaseCustomModel>> listDownloadedModels() async {
+    List<CustomModel> models = List<CustomModel>.empty();
+
     print("Web plugin working from listDownloadedModels()! -Ian");
     throw UnimplementedError('listDownloadedModels() is not implemented');
   }
