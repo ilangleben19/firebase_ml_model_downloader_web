@@ -52,7 +52,7 @@ class ModelDatabase {
             .getDirectoryHandle(
                 modelDirectoryPath, FileSystemGetDirectoryOptions(create: true))
             .toDart);
-
+    print('got dir ok');
     if (modelNames == null) {
       await prefs.setStringList(listKey, []);
     } else {
