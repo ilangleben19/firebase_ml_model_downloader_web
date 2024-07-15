@@ -61,8 +61,7 @@ class FirebaseMlModelDownloaderWeb extends FirebaseModelDownloaderPlatform {
   @override
   Future<List<FirebaseCustomModel>> listDownloadedModels() async {
     print("Web plugin working from listDownloadedModels()! -Ian 12345");
-    //return modelDatabase!.listDownloadedModels();
-    return Future.value(List<FirebaseCustomModel>.empty());
+    return modelDatabase!.listDownloadedModels();
   }
 
   /// Deletes a locally downloaded model by name.
