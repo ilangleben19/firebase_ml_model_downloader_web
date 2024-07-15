@@ -48,8 +48,10 @@ class ModelDatabase {
     final modelDirectoryHandle = await window.navigator.storage
         .getDirectory()
         .toDart
-        .then((rootHandle) =>
-            rootHandle.getDirectoryHandle(modelDirectoryPath).toDart);
+        .then((rootHandle) => rootHandle
+            .getDirectoryHandle(
+                modelDirectoryPath, FileSystemGetDirectoryOptions(create: true))
+            .toDart);
 
     if (modelNames == null) {
       await prefs.setStringList(listKey, []);
