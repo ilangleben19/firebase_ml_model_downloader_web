@@ -1,12 +1,11 @@
-import 'dart:io';
-
+import 'package:firebase_ml_model_downloader_web/model_database.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ml_model_downloader_platform_interface/firebase_ml_model_downloader_platform_interface.dart';
 
-import 'custom_model.dart';
-
 class FirebaseMlModelDownloaderWeb extends FirebaseModelDownloaderPlatform {
+  final ModelDatabase? modelDatabase;
+
   static void registerWith(Registrar registrar) {
     FirebaseModelDownloaderPlatform.instance =
         FirebaseMlModelDownloaderWeb.instance;
@@ -16,14 +15,26 @@ class FirebaseMlModelDownloaderWeb extends FirebaseModelDownloaderPlatform {
     return FirebaseMlModelDownloaderWeb._();
   }
 
-  FirebaseMlModelDownloaderWeb._() : super(appInstance: null);
+  FirebaseMlModelDownloaderWeb._()
+      : modelDatabase = null,
+        super(appInstance: null);
 
   FirebaseMlModelDownloaderWeb({required FirebaseApp app})
-      : super(appInstance: app);
+      : modelDatabase = ModelDatabase(app),
+        super(appInstance: app);
 
   @override
   FirebaseModelDownloaderPlatform delegateFor({required FirebaseApp app}) {
     return FirebaseMlModelDownloaderWeb(app: app);
+  }
+
+  Future<FirebaseCustomModel> getLatestModel(
+      String modelName, FirebaseModelDownloadConditions conditions) async {
+    throw UnimplementedError();
+  }
+
+  Future<FirebaseCustomModel> getLocalModel(String modelName) async {
+    throw UnimplementedError();
   }
 
   /// Gets the downloaded model file based on download type and conditions.
@@ -34,22 +45,22 @@ class FirebaseMlModelDownloaderWeb extends FirebaseModelDownloaderPlatform {
     FirebaseModelDownloadConditions conditions,
   ) {
     print("Web plugin working from getModel()! -Ian");
-    //throw UnimplementedError('getModel() is not implemented');
 
-    return Future.value(FirebaseCustomModel(
-        file: File.fromUri(Uri(path: './test12345')),
-        size: 613,
-        name: 'test-model',
-        hash: '1235'));
+    switch (downloadType) {
+      case FirebaseModelDownloadType.localModel:
+        return getLocalModel(modelName);
+      case FirebaseModelDownloadType.latestModel:
+        return getLatestModel(modelName, conditions);
+      case FirebaseModelDownloadType.localModelUpdateInBackground:
+        getLatestModel(modelName, conditions);
+        return getLocalModel(modelName);
+    }
   }
 
   /// Lists all models downloaded to device.
   @override
   Future<List<FirebaseCustomModel>> listDownloadedModels() async {
-    List<CustomModel> models = List<CustomModel>.empty();
-
-    print("Web plugin working from listDownloadedModels()! -Ian");
-    throw UnimplementedError('listDownloadedModels() is not implemented');
+    return modelDatabase!.listDownloadedModels();
   }
 
   /// Deletes a locally downloaded model by name.
