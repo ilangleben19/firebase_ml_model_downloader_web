@@ -37,6 +37,7 @@ class ModelDatabase {
   }
 
   Future<List<CustomModel>> listDownloadedModels() async {
+    print("made it into model_datbase list fxn")
     final prefs = await SharedPreferences.getInstance();
     await prefs.reload();
 
